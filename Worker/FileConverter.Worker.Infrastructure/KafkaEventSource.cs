@@ -63,6 +63,8 @@ public class KafkaEventSource<T> : IEventSource<T> where T : class
         catch (Exception ex)
         {
             _logger.LogError(ex, $"Error in {nameof(KafkaEventSource<T>)}.{nameof(ReadNoThrow)}");
+            
+            // TODO: Make delay optional
             await Task.Delay(1000, cancellationToken);
             return null;
         }
